@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">✏️ Edit Student</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary">
+        💾 Update Student
+    </button>
+
+    <a href="{% url 'students' %}" class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>
+
+{% endblock %}

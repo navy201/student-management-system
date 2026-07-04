@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+<h1 class="mb-4">👨‍🎓 Students</h1>
+<div class="alert alert-info">
+    <strong>Total Students:</strong> {{ total_students }}
+</div>
+
+<a href="/add/" class="btn btn-success mb-3">
+    ➕ Add Student
+</a>
+<a href="/export-csv/" class="btn btn-warning mb-3">
+    📥 Export CSV
+</a>
+
+<form method="GET" class="mb-3">
+
+    <input
+        type="text"
+        name="search"
+        value="{{ request.GET.search }}"
+        placeholder="Search student by name"
+        class="form-control">
+
+    <br>
+
+    <button type="submit" class="btn btn-primary">
+        Search
+    </button>
+
+    <a href="/students/" class="btn btn-secondary">
+        Reset
+    </a>
+
+</form>
+
+<table class="table table-bordered table-hover table-striped shadow">
+
+    <tr class="table-dark">
+
+        <th>Name</th>
+        <th>Age</th>
+        <th>Course</th>
+        <th>Email</th>
+        <th>Action</th>
+
+    </tr>
+
+    {% for student in students %}
+
+    <tr>
+
+        <td>{{ student.name }}</td>
+        <td>{{ student.age }}</td>
+        <td>{{ student.course }}</td>
+        <td>{{ student.email }}</td>
+
+        <td>
+
+            <a href="/details/{{ student.id }}/"
+               class="btn btn-info btn-sm">
+
+               👁 View
+
+            </a>
+
+            <a href="/edit/{{ student.id }}/"
+               class="btn btn-primary btn-sm">
+
+               ✏️ Edit
+
+            </a>
+
+            <a href="/delete/{{ student.id }}/"
+               class="btn btn-danger btn-sm">
+
+               🗑 Delete
+
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+<div class="mt-3">
+
+    {% if students.has_previous %}
+        <a href="?page={{ students.previous_page_number }}&search={{ request.GET.search }}" class="btn btn-secondary">
+            ⬅ Previous
+        </a>
+    {% endif %}
+
+    <span class="mx-3">
+        Page {{ students.number }} of {{ students.paginator.num_pages }}
+    </span>
+
+    {% if students.has_next %}
+        <a href="?page={{ students.next_page_number }}&search={{ request.GET.search }}" class="btn btn-primary">
+            Next ➡
+        </a>
+    {% endif %}
+
+</div>
+
+{% endblock %}

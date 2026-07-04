@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+<div class="text-center py-5">
+
+    <h1 class="display-4 fw-bold">
+        🎓 Student Management System
+    </h1>
+
+    <p class="lead">
+        Manage student records quickly, securely, and efficiently.
+    </p>
+
+    <a href="/add/" class="btn btn-success btn-lg">
+        ➕ Add Student
+    </a>
+
+    <a href="{% url 'students' %}" class="btn btn-outline-primary btn-lg">
+        📋 View Students
+    </a>
+
+</div>
+
+<hr class="my-5">
+
+<h2 class="text-center mb-4">✨ Why Choose Our System?</h2>
+
+<div class="row text-center">
+
+    <div class="col-md-4">
+        <div class="card shadow p-3">
+            <h3>⚡ Fast</h3>
+            <p>Quickly add, edit, search, and manage student records.</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow p-3">
+            <h3>🔒 Secure</h3>
+            <p>Student information is safely stored in the database.</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow p-3">
+            <h3>📱 Easy to Use</h3>
+            <p>A simple and user-friendly interface for managing students.</p>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<hr class="my-5">
+
+<h2 class="text-center mb-4">📊 Our Statistics</h2>
+
+<div class="row text-center mb-5">
+
+    <div class="col-md-4">
+        <div class="card border-primary shadow">
+            <div class="card-body">
+                <h1>👨‍🎓</h1>
+                <h3>{{ total_students }}</h3>
+                <p>Total Students</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card border-success shadow">
+            <div class="card-body">
+                <h1>📚</h1>
+                <h3>5+</h3>
+                <p>Courses</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card border-warning shadow">
+            <div class="card-body">
+                <h1>🏆</h1>
+                <h3>100%</h3>
+                <p>Student Management</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr class="my-5">
+
+<h2 class="text-center mb-4">👨‍🎓 Recent Students</h2>
+
+<div class="table-responsive">
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+        <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for student in students %}
+
+        <tr>
+
+            <td>
+                {% if student.photo %}
+                    <img src="{{ student.photo.url }}" width="60" height="60" class="rounded-circle">
+                {% else %}
+                    No Photo
+                {% endif %}
+            </td>
+
+            <td>{{ student.name }}</td>
+            <td>{{ student.course }}</td>
+            <td>{{ student.email }}</td>
+
+        </tr>
+
+    {% empty %}
+
+        <tr>
+            <td colspan="4" class="text-center">
+                No students found.
+            </td>
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+</div>
+
+
+{% endblock %}
