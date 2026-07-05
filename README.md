@@ -11,6 +11,17 @@ A web-based Student Management System developed using Django. This application h
 - Search Students by Name
 - Responsive User Interface
 
+- ## 🌐 Live Demo
+
+🔗 https://student-management-system-70be.onrender.com
+
+---
+
+## 🔐 Demo Login Credentials
+
+Username: demo  
+Password: demo123
+
 ## 🛠 Technologies Used
 
 - Python
